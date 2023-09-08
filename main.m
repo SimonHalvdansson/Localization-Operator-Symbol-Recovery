@@ -5,7 +5,7 @@ g = pgauss(a*M);
 
 [Fa, Fs] = framepair('dgt', g, 'dual', a, M);
 
-symbol = load_symbol(1, M);
+symbol = load_symbol(4, M);
 
 s = framenative2coef(Fa, symbol);
 h = operatornew('framemul', Fa, Fs, s);
@@ -32,10 +32,10 @@ titles = ["Symbol";
 
 images = {symbol, rec_wn, rec_as, rec_aw, rec_pt, rec_gp};
 
-%for i = [1,4]
 for i = 1:figs
     subplot(1, figs, i);
     imagesc(images{i});
+    colormap(flipud(gray));
     colorbar;
     title(titles(i));
 end

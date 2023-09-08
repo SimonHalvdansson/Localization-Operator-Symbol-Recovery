@@ -13,18 +13,17 @@ function [symbol] = load_symbol(symb_index, M)
     end
 
     if symb_index == 1
-        centers = [M/2, M/2; 
-           M/5, M/5;
-           4*M/5, M/4;
-           M/6, 4*M/5;
-           4*M/5, 3*M/5];
+        centers = [0.5, 0.5; 
+           0.25, 0.25;
+           0.7, 0.3;
+           0.1, 0.1];
 
-        weights = [1, 2, 3, 0, 0];
+        weights = [1, 2, 3, 0.5, 0];
 
         for i = 1:M
             for j = 1:M
-                for k = 1:5
-                    symbol(i,j) = symbol(i,j) + weights(k) * exp(-((i-centers(k, 1))^2/5 + (j-centers(k, 2))^2/5));
+                for k = 1:4
+                    symbol(i,j) = symbol(i,j) + weights(k) * exp(-((i-centers(k, 1)*M)^2/5 + (j-centers(k, 2)*M)^2/5));
                 end
             end
         end
@@ -45,16 +44,23 @@ function [symbol] = load_symbol(symb_index, M)
                     symbol(i,j) = i/4;
                 end
             
-                if abs((j-M*7/8)-10*sin((i-M/4))/3) < M/10 && abs(i-M/2) > M/10
-                    symbol(i,j) = 2;
+                if abs((j-M*7/8)-10*sin((i-M/4))/3) < M/10
+                    symbol(i,j) = 1.5;
                 end
             end
         end
+        
+        symbol(33, 20) = 5;
+        symbol(12, 15) = 7;
+         
     end
    
     if symb_index == 3
         symbol = double(imresize(rgb2gray(imread('star.png')), [M, M])) / 255;
     end
 
+    if symb_index == 4
+        symbol = 1-double(imresize(rgb2gray(imread('lc.png')), [M, M])) / 255;
+    end
 
 end
