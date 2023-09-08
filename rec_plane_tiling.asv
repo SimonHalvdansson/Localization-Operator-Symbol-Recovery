@@ -1,0 +1,15 @@
+function [rec] = rec_plane_tiling(a, M, g, h)
+    N = a*M;
+
+    for k = 0:100
+        %let f_k be the k:th hermite
+        fk = pherm(N, k);
+
+        %and then translate it in time and fr
+        fk = circshift(fk, a*M/2);
+        l = (0:L-1).';
+        fk = fk.*exp(2*pi*1i*l/2);
+
+
+    end
+end

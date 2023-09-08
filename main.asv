@@ -1,0 +1,62 @@
+%ltfatstart;
+a = 10;
+M = 40;
+g = pgauss(a*M);
+
+[Fa, Fs] = framepair('dgt', g, 'dual', a, M);
+
+symbol = load_symbol(2, M);
+
+s = framenative2coef(Fa, symbol);
+h = operatornew('framemul', Fa, Fs, s);
+
+rec_wn = rec_white_noise(h, g, a, M, 20, 1);
+rec_as = rec_accumulated_spectrogram(a, M, g, s);
+rec_aw = rec_accumulated_wigner(a, M, s);
+rec_pt = rec_plane_tiling(a, M, g, h, 100);
+rec_gp = rec_gabor_projection(a, M, g, h);
+
+close all;
+
+fig = figure;
+fig.Position = [100, 100, 2000, 300];
+
+titles = ["Symbol";
+         "White noise";
+         "Weighted accumulated spectrogram";
+         "Weighted Wigner distribution";
+         "Plane tiling";
+         "Gabor projection"];
+
+images = [symbol]
+
+subplot(1, 6, 1);
+imagesc(symbol);
+colorbar;
+title("Symbol");
+
+subplot(1, 6, 2);
+imagesc(rec_wn);
+colorbar;
+title("White noise");
+
+subplot(1, 6, 3);
+imagesc(rec_as);
+colorbar;
+title("Weighted accumulated spectrogram");
+
+subplot(1, 6, 3);
+imagesc(rec_as);
+colorbar;
+title("Weighted accumulated spectrogram");
+
+subplot(1, 6, 4);
+imagesc(rec_pt);
+colorbar;
+title("Plane tiling");
+
+subplot(1, 6, 5);
+imagesc(rec_gp);
+colorbar;
+title("Gabor projection");
+
