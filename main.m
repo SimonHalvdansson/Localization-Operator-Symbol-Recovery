@@ -12,8 +12,8 @@ h = operatornew('framemul', Fa, Fs, s);
 
 rec_wn = rec_white_noise(h, g, a, M, 20, 1);
 rec_as = rec_accumulated_spectrogram(a, M, g, s);
-rec_aw = rec_accumulated_wigner(a, M, g, s);
-rec_pt = rec_plane_tiling(a, M, g, h, 100);
+rec_aw = rec_accumulated_wigner(a, M, g, symbol);
+rec_pt = rec_plane_tiling(a, M, g, h, 200);
 rec_gp = rec_gabor_projection(a, M, g, h);
 
 close all;
