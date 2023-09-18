@@ -60,4 +60,13 @@ function [symbol] = load_symbol(symb_index, M)
         symbol = 1-double(imresize(rgb2gray(imread('lc.png')), [M, M])) / 255;
     end
 
+    if symb_index == 5
+        unblurred = load_symbol(4, M);
+        
+        filter_dim = 3;
+        sigma = 1;
+        h = fspecial('gaussian', [filter_dim filter_dim], sigma);
+        symbol = imfilter(unblurred, h);
+    end
+
 end

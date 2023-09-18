@@ -6,7 +6,7 @@ g = pgauss(a*M);
 
 [Fa, Fs] = framepair('dgt', g, 'dual', a, M);
 
-symbol = load_symbol(4, M);
+symbol = load_symbol(5, M);
 
 s = framenative2coef(Fa, symbol);
 h = operatornew('framemul', Fa, Fs, s);

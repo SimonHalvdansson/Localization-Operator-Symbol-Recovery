@@ -1,16 +1,17 @@
 %addpath(genpath('ltfat-2.6.0'));
 %ltfatstart;
 a = 10;
-M = 80;
+M = 50;
 g = pgauss(a*M);
 
 [Fa, Fs] = framepair('dgt', g, 'dual', a, M);
 
-symbol = load_symbol(2, M);
+symbol = load_symbol(5, M);
 
 s = framenative2coef(Fa, symbol);
+h = operatornew('framemul', Fa, Fs, s);
 
-rec_wig = rec_accumulated_wigner(a, M, g, symbol);
+rec_gp = rec_gabor_projection(a, M, g, h);
 
 close all;
 
@@ -24,10 +25,10 @@ colorbar;
 title("Symbol");
 
 subplot(1, 2, 2);
-imagesc(rec_wig);
+imagesc(rec_gp);
 colormap(flipud(gray));
 colorbar;
-title("Weighted accumulated Wigner distributions");
+title("Gabor projection");
 
-print(fig, '-dpng', 'figures/weighted_accumulated_wigner_distributions_illustration.png');
+print(fig, '-dpng', 'figures/gabor_projection_illustration.png');
 

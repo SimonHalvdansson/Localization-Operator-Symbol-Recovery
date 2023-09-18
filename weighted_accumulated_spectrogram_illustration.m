@@ -1,12 +1,12 @@
 %addpath(genpath('ltfat-2.6.0'));
 %ltfatstart;
 a = 10;
-M = 40;
+M = 100;
 g = pgauss(a*M);
 
 [Fa, Fs] = framepair('dgt', g, 'dual', a, M);
 
-symbol = load_symbol(2, M);
+symbol = load_symbol(0, M);
 
 s = framenative2coef(Fa, symbol);
 
