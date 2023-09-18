@@ -49,9 +49,6 @@ function [symbol] = load_symbol(symb_index, M)
                 end
             end
         end
-        
-        symbol(33, 20) = 5;
-        symbol(12, 15) = 7;
          
     end
    
