@@ -1,3 +1,4 @@
+%addpath(genpath('ltfat-2.6.0'));
 %ltfatstart;
 a = 10;
 M = 40;
