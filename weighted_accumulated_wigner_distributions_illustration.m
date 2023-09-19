@@ -27,7 +27,7 @@ subplot(1, 2, 2);
 imagesc(rec_wig);
 colormap(flipud(gray));
 colorbar;
-title("Weighted accumulated Wigner distributions");
+title("Weighted accumulated Wigner distribution");
 
-print(fig, '-dpng', 'figures/weighted_accumulated_wigner_distributions_illustration.png');
+print(fig, '-dpng', 'figures/weighted_accumulated_wigner_distribution_illustration.png');
 

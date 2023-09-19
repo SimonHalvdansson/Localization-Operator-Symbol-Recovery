@@ -1,12 +1,12 @@
 %addpath(genpath('ltfat-2.6.0'));
 %ltfatstart;
 a = 10;
-M = 100;
+M = 40;
 g = pgauss(a*M);
 
 [Fa, Fs] = framepair('dgt', g, 'dual', a, M);
 
-symbol = load_symbol(0, M);
+symbol = load_symbol(2, M);
 
 s = framenative2coef(Fa, symbol);
 
@@ -36,7 +36,7 @@ subplot(1, 3, 2);
 imagesc(rec_as);
 colormap(flipud(gray));
 colorbar;
-title("Weighted accumulated spectrograms");
+title("Weighted accumulated spectrogram");
 
 subplot(1, 3, 3);
 imagesc(deconv);
@@ -44,5 +44,5 @@ colormap(flipud(gray));
 colorbar;
 title("Deconvolved");
 
-print(fig, '-dpng', 'figures/weighted_accumulated_spectrograms_illustration.png');
+print(fig, '-dpng', 'figures/weighted_accumulated_spectrogram_illustration.png');
 

@@ -63,7 +63,8 @@ for i = 1:figs
     imagesc(diff)
     colormap(flipud(gray));
     colorbar;
-    title(num2str(er*100));
-    
+    title(num2str(er*100)); 
 end
+
+exportgraphics(gcf,'figures/performance.png','Resolution',300) 
 
