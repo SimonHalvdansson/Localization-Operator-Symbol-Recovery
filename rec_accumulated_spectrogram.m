@@ -5,8 +5,6 @@ function [acc_spec] = rec_accumulated_spectrogram(a, M, g, s)
 
     [V, D] = framemuleigs(Fa, Fs, s, a*M);
 
-    
-
     for k = 1:N
        acc_spec = acc_spec + real(D(k)) * abs(dgt(V(:, k), g, a, M)).^2;
     end

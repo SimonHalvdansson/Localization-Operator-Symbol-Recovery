@@ -31,5 +31,5 @@ for k = 1:N
     title("N = " + int2str(counts(k)));
 end
 
-print(fig, '-dpng', 'figures/plane_tiling_illustration.png');
+exportgraphics(gcf,'figures/plane_tiling_illustration.png','Resolution',300) 
 
