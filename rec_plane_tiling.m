@@ -13,4 +13,6 @@ function [rec] = rec_plane_tiling(a, M, g, h, K)
 
         rec = rec + abs(dgt(operator(h, fk), g, a, M)).^2;
     end
+
+    rec = rec.^(0.5);
 end

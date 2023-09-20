@@ -5,7 +5,7 @@ function [rho] = rec_white_noise(h, g, a, M, K, sigma)
     total_noise = [];
    
     for k = 1:K
-        noise = randn(N, sigma);
+        noise = randn(N, 1).*(sigma*sigma);
         total_noise = cat(1, total_noise, noise);
         rho = rho + abs(dgt(operator(h, noise), g, a, M)).^2/K;
     end

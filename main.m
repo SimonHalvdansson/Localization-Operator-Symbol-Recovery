@@ -1,46 +1,54 @@
 %addpath(genpath('ltfat-2.6.0'));
 %ltfatstart;
 a = 10;
-M = 80;
-g = pgauss(a*M);
+M = 60;
+symbol_index = 2;
 
+g = pgauss(a*M);
 [Fa, Fs] = framepair('dgt', g, 'dual', a, M);
 
-symbol = load_symbol(5, M);
+symbol = load_symbol(symbol_index, M);
 
 s = framenative2coef(Fa, symbol);
 h = operatornew('framemul', Fa, Fs, s);
 
-rec_wn = rec_white_noise(h, g, a, M, 40, 1);
+rec_wn = rec_white_noise(h, g, a, M, 200, 1);
 rec_as = rec_accumulated_spectrogram(a, M, g, s);
 rec_aw = rec_accumulated_wigner(a, M, g, symbol);
-rec_pt = rec_plane_tiling(a, M, g, h, 200);
+rec_pt = rec_plane_tiling(a, M, g, h, a*M);
 rec_gp = rec_gabor_projection(a, M, g, h);
 
 close all;
 
 fig = figure;
-fig.Position = [100, 1000, 2200, 350];
+fig.Position = [100, 100, 2400, 150];
 
 figs = 6;
 
 titles = ["Symbol";
          "White noise";
-         "Weighted accumulated spectrogram";
-         "Weighted Wigner distribution";
+         "W. acc. spectrogram";
+         "W. acc. Wigner distribution";
          "Plane tiling";
          "Gabor projection"];
 
 images = {symbol, rec_wn, rec_as, rec_aw, rec_pt, rec_gp};
 
+% 2 = show, 1 = hide
+showErrors = 1;
+
 for i = 1:figs
-    subplot(2, figs, i);
+    subplot(showErrors, figs, i);
     imagesc(images{i});
     colormap(flipud(gray));
     colorbar;
     title(titles(i));
     
     if i == 1
+        continue;
+    end
+
+    if showErrors == 1
         continue;
     end
     
@@ -66,5 +74,5 @@ for i = 1:figs
     title(num2str(er*100)); 
 end
 
-exportgraphics(gcf,'figures/performance.png','Resolution',300) 
+exportgraphics(gcf,'figures/overview.png','Resolution',300) 
 
